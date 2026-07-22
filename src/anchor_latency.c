@@ -22,7 +22,7 @@ int main()
    page[0] = 100;
    int actual = -1;
    get_mempolicy(&actual, NULL, 0, page, MPOL_F_NODE | MPOL_F_ADDR);
-   printf("requested node 0, page actually on node %d\n", actual);
+   //printf("requested node 0, page actually on node %d\n", actual);
 
 //Pin thread to each vCPU 
   int cpu;
@@ -36,7 +36,7 @@ int main()
        continue;
     }
     sched_yield();
-    printf("This thread is on vCPU %d\n", sched_getcpu());
+//  printf("This thread is on vCPU %d\n", sched_getcpu());
     
     //Measure access latency
     unsigned aux;

@@ -1,4 +1,3 @@
-
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdint.h>
@@ -28,7 +27,7 @@ int main()
    page[0] = 100;
    int actual = -1;
    get_mempolicy(&actual, NULL, 0, page, MPOL_F_NODE | MPOL_F_ADDR);
-   //printf("requested node 0, page actually on node %d\n", actual);
+   //printf("requested node 0, page actually on node %d\n", actual); test code 
 
 //Pin thread to each vCPU 
   int cpu;
@@ -42,7 +41,7 @@ int main()
        continue;
     }
     sched_yield();
-//  printf("This thread is on vCPU %d\n", sched_getcpu());
+//  printf("This thread is on vCPU %d\n", sched_getcpu()); test code
     
     //Measure access latency
     unsigned aux;
@@ -61,6 +60,7 @@ int main()
       acc_table[acc] = latency;
     } 
     qsort(acc_table, 10000, sizeof(uint64_t), compare);
+    //for (uint64_t element = 0; element < 10000; element++) { printf("%lu ", acc_table[element]);} test code
     printf("vCPU %d -> node %d: %lu median cycles\n", sched_getcpu(), actual, acc_table[5000]);
 
   }
